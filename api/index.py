@@ -1,15 +1,11 @@
+from flask import Flask, request, jsonify, render_template
+import requests
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def hello():
     return 'Hello, world'
-
-from flask import Flask, request, jsonify
-import requests
-
-
 
 @app.route('/proxy', methods=['GET', 'POST'])
 def proxy():
@@ -32,12 +28,6 @@ def proxy():
     except requests.exceptions.RequestException as e:
         return jsonify({"error": str(e)}), 500
 
-
 @app.route('/test')
 def test():
     return 'Test'
-
-@app.route('/result')
-def result():
-   dict = {'phy':50,'che':60,'maths':70}
-   return render_template('result.html', result = dict)
